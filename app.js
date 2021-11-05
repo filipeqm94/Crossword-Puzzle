@@ -31,6 +31,7 @@ function addDataSet(i, j, element) {
   //hello
   if (i === 3 && j === 0) {
     element.setAttribute("data-letter", "h");
+    element.setAttribute("placeholder", "1");
   } else if (i === 3 && j === 1) {
     element.setAttribute("data-letter", "e");
   } else if (i === 3 && j === 2) {
@@ -44,6 +45,7 @@ function addDataSet(i, j, element) {
   //world
   else if (i === 2 && j === 4) {
     element.setAttribute("data-letter", "w");
+    element.setAttribute("placeholder", "2");
   } else if (i === 4 && j === 4) {
     element.setAttribute("data-letter", "r");
   } else if (i === 5 && j === 4) {
@@ -55,6 +57,7 @@ function addDataSet(i, j, element) {
   //react
   else if (i === 0 && j === 7) {
     element.setAttribute("data-letter", "r");
+    element.setAttribute("placeholder", "3");
   } else if (i === 1 && j === 7) {
     element.setAttribute("data-letter", "e");
   } else if (i === 2 && j === 7) {
@@ -68,6 +71,7 @@ function addDataSet(i, j, element) {
   //java
   else if (i === 2 && j === 6) {
     element.setAttribute("data-letter", "j");
+    element.setAttribute("placeholder", "4");
   } else if (i === 2 && j === 8) {
     element.setAttribute("data-letter", "v");
   } else if (i === 2 && j === 9) {
@@ -75,13 +79,14 @@ function addDataSet(i, j, element) {
   }
 
   //script
-  else if (i === 4 && j === 6) {
-    element.setAttribute("data-letter", "p");
-  } else if (i === 4 && j === 5) {
-    element.setAttribute("data-letter", "i");
+  else if (i === 4 && j === 2) {
+    element.setAttribute("data-letter", "s");
+    element.setAttribute("placeholder", "5");
   } else if (i === 4 && j === 3) {
     element.setAttribute("data-letter", "c");
-  } else if (i === 4 && j === 2) {
-    element.setAttribute("data-letter", "s");
+  } else if (i === 4 && j === 5) {
+    element.setAttribute("data-letter", "i");
+  } else if (i === 4 && j === 6) {
+    element.setAttribute("data-letter", "p");
   }
 }

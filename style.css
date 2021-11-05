@@ -13,6 +13,7 @@ body {
 }
 
 .cell {
+  position: relative;
   outline: none;
   border: 1px solid black;
 
@@ -24,5 +25,10 @@ body {
 
 .cell.disabled {
   background-color: black;
-  /* border: 1px solid white; */
+}
+
+.cell::placeholder {
+  position: absolute;
+  color: black;
+  font-size: 18px;
 }
