@@ -1,4 +1,8 @@
 const puzzleGrid = document.querySelector("#puzzleGrid");
+const checkAnswer = document.querySelector("#checkAnswers");
+
+const winnerModal = document.querySelector(`#winnerModal`);
+const resetGame = document.querySelector("#resetGame");
 
 //create a loop to create the amount of rows needed for the puzzle board
 for (let i = 0; i < 7; i++) {
@@ -91,3 +95,38 @@ function addDataSet(i, j, element) {
     element.setAttribute("data-letter", "p");
   }
 }
+
+//check answer
+function answerCheck() {
+  const rightAnswers = [];
+
+  puzzleGrid.childNodes.forEach((row) => {
+    for (let i = 0; i < row.childNodes.length; i++) {
+      if (
+        row.childNodes[i].dataset.letter ===
+        row.childNodes[i].value.toLowerCase()
+      ) {
+        row.childNodes[i].style.border = "2px solid green";
+        rightAnswers.push(row.childNodes[i]);
+      }
+    }
+  });
+
+  if (rightAnswers.length === 21) {
+    winnerModal.style.display = "block";
+  }
+}
+
+//reset
+function reset() {
+  winnerModal.style.display = "none";
+  puzzleGrid.childNodes.forEach((row) => {
+    for (let i = 0; i < row.childNodes.length; i++) {
+      row.childNodes[i].value = ``;
+      row.childNodes[i].style.border = `1px solid black`;
+    }
+  });
+}
+
+checkAnswer.addEventListener("click", answerCheck);
+resetGame.addEventListener("click", reset);
