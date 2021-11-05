@@ -21,7 +21,8 @@ As a user I want to:
 - [x] Draw a NxM grid where the words will be placed.
 - [x] Display a list of hints for each word on the side of the puzzle.
 - [x] User should be able to insert only one character on available cells, but should NOT be able to insert characters inside unavailable cells.
-- [ ] Multiple words should be able to use the same cell for the letter they have in common.
+- [x] Assign each available cell with a letter
+- [x] Multiple words should be able to use the same cell for the letter they have in common.
 - [ ] Check if the sequence of letters correspond to right answer assigned when "Check Answer" button is clicked.
 - [ ] Cross out hint when users guesses the right answer after clicking the "Check Answer" button.
 - [ ] Display winner message when all guesses are correct

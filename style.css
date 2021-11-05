@@ -4,17 +4,25 @@ body {
 
 #puzzleGrid {
   display: grid;
-  grid-template: repeat(5, 100px) / repeat(5, 100px);
+  grid-template-rows: repeat(7, 64px);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(10, 64px);
 }
 
 .cell {
-  height: 100px;
-  width: 100px;
-
   outline: none;
+  border: 1px solid black;
 
   text-align: center;
   text-transform: uppercase;
 
-  font-size: 25px;
+  font-size: 24px;
+}
+
+.cell.disabled {
+  background-color: black;
+  /* border: 1px solid white; */
 }
