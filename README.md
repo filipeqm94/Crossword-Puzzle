@@ -6,12 +6,15 @@
 
 ## Wire Frames
 
-> ![Screen Shot 2021-11-04 at 7 43 25 PM](https://media.git.generalassemb.ly/user/39433/files/86150500-3da7-11ec-8b44-e24ee4742d5c)
-> ![Screen Shot 2021-11-04 at 7 11 12 PM](https://media.git.generalassemb.ly/user/39433/files/038a4680-3da3-11ec-951a-21aae112bbfa)
+> ![Screen Shot 2021-11-04 at 7 43 25 PM](https://media.git.generalassemb.ly/user/39433/files/86150500-3da7-11ec-8b44-e24ee4742d5c) > ![Screen Shot 2021-11-04 at 7 11 12 PM](https://media.git.generalassemb.ly/user/39433/files/038a4680-3da3-11ec-951a-21aae112bbfa)
 
 ## User Stories
 
-> 1. As a user I want be able to insert characters on the cells that are available.
+As a user I want to:
+
+> 1. Be able to read hints to the words I need to fill in the available spaces
+> 1. Be able to insert characters on the cells that are available.
+> 1. See a winner message when I get all the guesses correctly
 
 ### MVP Goals
 
