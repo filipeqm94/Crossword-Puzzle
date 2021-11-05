@@ -16,6 +16,7 @@ for (let i = 0; i < 7; i++) {
     //add data set with the value of the letter to cells that will be available
     addDataSet(i, j, column);
 
+    //disable cells with no data set
     if (!column.dataset.letter) {
       column.classList.add("disabled");
     }
