@@ -12,14 +12,14 @@
 
 As a user I want to:
 
-> 1. Be able to read hints to the words I need to fill in the available spaces.
+> 1. Be able to read hints to the words I need to fill in the available spaces
 > 1. Be able to insert characters on the cells that are available.
-> 1. See a winner message when I get all the guesses correctly.
+> 1. See a winner message when I get all the guesses correctly
 
 ### MVP Goals
 
 - [x] Draw a NxM grid where the words will be placed.
-- [ ] Display a list of hints for each word on the side of the puzzle.
+- [x] Display a list of hints for each word on the side of the puzzle.
 - [ ] User should be able to insert only one character on available cells, but should NOT be able to insert characters inside unavailable cells.
 - [ ] Multiple words should be able to use the same cell for the letter they have in common.
 - [ ] Check if the sequence of letters correspond to right answer assigned when "Check Answer" button is clicked.
