@@ -18,7 +18,7 @@ As a user I want to:
 
 ### MVP Goals
 
-- [ ] Draw a NxM grid where the words will be placed.
+- [x] Draw a NxM grid where the words will be placed.
 - [ ] Display a list of hints for each word on the side of the puzzle.
 - [ ] User should be able to insert only one character on available cells, but should NOT be able to insert characters inside unavailable cells.
 - [ ] Multiple words should be able to use the same cell for the letter they have in common.

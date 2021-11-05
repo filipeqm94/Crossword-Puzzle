@@ -1,0 +1,17 @@
+body {
+  font-family: sans-serif;
+}
+
+#puzzleGrid {
+  display: grid;
+  grid-template: repeat(5, 100px) / repeat(5, 100px);
+}
+
+.cell {
+  height: 100px;
+  width: 100px;
+
+  background-color: black;
+
+  outline: none;
+}
