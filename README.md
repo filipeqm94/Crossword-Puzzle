@@ -12,9 +12,9 @@
 
 As a user I want to:
 
-> 1. Be able to read hints to the words I need to fill in the available spaces
+> 1. Be able to read hints to the words I need to fill in the available spaces.
 > 1. Be able to insert characters on the cells that are available.
-> 1. See a winner message when I get all the guesses correctly
+> 1. See a winner message when I get all the guesses correctly.
 
 ### MVP Goals
 
