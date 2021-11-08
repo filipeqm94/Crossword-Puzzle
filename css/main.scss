@@ -60,4 +60,19 @@ body {
 button {
   background-color: white;
   padding: 10px;
+
+  box-shadow: 2px 2px black;
+
+  transition: all 0.1s ease-out;
+
+  &:hover {
+    background-color: rgb(35, 35, 35);
+    color: white;
+
+    cursor: pointer;
+  }
+
+  &:active {
+    transform: translate(2px, 2px);
+  }
 }
