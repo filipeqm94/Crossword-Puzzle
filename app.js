@@ -106,7 +106,8 @@ function answerCheck() {
         row.childNodes[i].dataset.letter ===
         row.childNodes[i].value.toLowerCase()
       ) {
-        row.childNodes[i].style.border = "2px solid green";
+        row.childNodes[i].style.border = "3px solid green";
+        row.childNodes[i].style.backgroundColor = "#00ff0050";
         rightAnswers.push(row.childNodes[i]);
       }
     }
@@ -123,7 +124,10 @@ function reset() {
   puzzleGrid.childNodes.forEach((row) => {
     for (let i = 0; i < row.childNodes.length; i++) {
       row.childNodes[i].value = ``;
-      row.childNodes[i].style.border = `1px solid black`;
+      row.childNodes[i].style.border = "1px solid black";
+      if (row.childNodes[i].classList[1] !== "disabled") {
+        row.childNodes[i].style.backgroundColor = "white";
+      }
     }
   });
 }
