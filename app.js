@@ -125,7 +125,7 @@ function reset() {
     for (let i = 0; i < row.childNodes.length; i++) {
       row.childNodes[i].value = ``;
       row.childNodes[i].style.border = "1px solid black";
-      if (row.childNodes[i].classList[1] !== "disabled") {
+      if (![...row.childNodes[i].classList].includes("disabled")) {
         row.childNodes[i].style.backgroundColor = "white";
       }
     }
