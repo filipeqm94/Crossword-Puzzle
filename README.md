@@ -25,7 +25,7 @@ As a user I want to:
 - [x] Multiple words should be able to use the same cell for the letter they have in common.
 - [x] Enumerate starter cell with hint number
 - [x] Check if the sequence of letters correspond to right answer assigned when "Check Answer" button is clicked.
-- [ ] Cross out hint when users guesses the right answer after clicking the "Check Answer" button.
+- [x] Cross out hint when users guesses the right answer after clicking the "Check Answer" button.
 - [x] Display winner message when all guesses are correct
 
 ### Stretch Goals

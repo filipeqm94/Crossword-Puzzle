@@ -1,8 +1,46 @@
 const puzzleGrid = document.querySelector("#puzzleGrid");
 const checkAnswer = document.querySelector("#checkAnswers");
-
+const hints = document.querySelector("#hints");
 const winnerModal = document.querySelector(`#winnerModal`);
 const resetGame = document.querySelector("#resetGame");
+
+const answers = {
+  answer1: [
+    [3, 0],
+    [3, 1],
+    [3, 2],
+    [3, 3],
+    [3, 4],
+  ],
+  answer2: [
+    [2, 4],
+    [3, 4],
+    [4, 4],
+    [5, 4],
+    [6, 4],
+  ],
+  answer3: [
+    [0, 7],
+    [1, 7],
+    [2, 7],
+    [3, 7],
+    [4, 7],
+  ],
+  answer4: [
+    [2, 6],
+    [2, 7],
+    [2, 8],
+    [2, 9],
+  ],
+  answer5: [
+    [4, 2],
+    [4, 3],
+    [4, 4],
+    [4, 5],
+    [4, 6],
+    [4, 7],
+  ],
+};
 
 //create a loop to create the amount of rows needed for the puzzle board
 for (let i = 0; i < 7; i++) {
@@ -113,6 +151,8 @@ function answerCheck() {
     }
   });
 
+  crossOut();
+
   if (rightAnswers.length === 21) {
     winnerModal.style.display = "block";
   }
@@ -130,6 +170,61 @@ function reset() {
       }
     }
   });
+
+  for (let i = 1; i <= 5; i++) {
+    document.querySelector(`#hint${i}`).style.textDecoration = "none";
+    document.querySelector(`#hint${i}`).style.color = "black";
+  }
+}
+
+function simplified(i, j) {
+  return (
+    puzzleGrid.childNodes[i].childNodes[j].dataset.letter ===
+    puzzleGrid.childNodes[i].childNodes[j].value.toLowerCase()
+  );
+}
+
+function crossOut() {
+  const answer1 = answers.answer1.map((pos) => {
+    return simplified(pos[0], pos[1]);
+  });
+
+  const answer2 = answers.answer2.map((pos) => {
+    return simplified(pos[0], pos[1]);
+  });
+
+  const answer3 = answers.answer3.map((pos) => {
+    return simplified(pos[0], pos[1]);
+  });
+
+  const answer4 = answers.answer4.map((pos) => {
+    return simplified(pos[0], pos[1]);
+  });
+
+  const answer5 = answers.answer5.map((pos) => {
+    return simplified(pos[0], pos[1]);
+  });
+
+  if (!answer1.includes(false)) {
+    document.querySelector("#hint1").style.textDecoration = "line-through";
+    document.querySelector("#hint1").style.color = "darkgray";
+  }
+  if (!answer2.includes(false)) {
+    document.querySelector("#hint2").style.textDecoration = "line-through";
+    document.querySelector("#hint2").style.color = "darkgray";
+  }
+  if (!answer3.includes(false)) {
+    document.querySelector("#hint3").style.textDecoration = "line-through";
+    document.querySelector("#hint3").style.color = "darkgray";
+  }
+  if (!answer4.includes(false)) {
+    document.querySelector("#hint4").style.textDecoration = "line-through";
+    document.querySelector("#hint4").style.color = "darkgray";
+  }
+  if (!answer5.includes(false)) {
+    document.querySelector("#hint5").style.textDecoration = "line-through";
+    document.querySelector("#hint5").style.color = "darkgray";
+  }
 }
 
 checkAnswer.addEventListener("click", answerCheck);
