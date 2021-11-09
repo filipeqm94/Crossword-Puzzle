@@ -8,26 +8,33 @@
     <link rel="stylesheet" href="./css/main.css" />
   </head>
   <body>
-    <h1>CROSSWORD PUZZLE</h1>
-    <div id="puzzleGrid"></div>
-    <ol id="hints">
-      <li id="hint1">
-        Used as a greeting or way to begin a phone conversation.
-      </li>
-      <li id="hint2">A region or group of countries</li>
-      <li id="hint3">
-        Respond or behave in a particular way in response to something.
-      </li>
-      <li id="hint4">Coffee.</li>
-      <li id="hint5">The written text of a play, movie, or broadcast.</li>
-    </ol>
-    <button id="checkAnswers">CHECK ANSWERS</button>
     <div id="winnerModal">
       <div id="modal-text-box">
         <h1>CONGRATULATIONS! YOU WON!</h1>
         <button id="resetGame">RESET GAME</button>
       </div>
     </div>
+    <header>
+      <h1>CROSSWORD PUZZLE</h1>
+    </header>
+    <main>
+      <section id="puzzleGrid"></section>
+      <section id="side">
+        <ol id="hints">
+          <li id="hint1">
+            Used as a greeting or way to begin a phone conversation.
+          </li>
+          <li id="hint2">A region or group of countries</li>
+          <li id="hint3">
+            Respond or behave in a particular way in response to something.
+          </li>
+          <li id="hint4">Coffee.</li>
+          <li id="hint5">The written text of a play, movie, or broadcast.</li>
+        </ol>
+        <button id="checkAnswers">CHECK ANSWERS</button>
+      </section>
+    </main>
+
     <script src="./app.js"></script>
   </body>
 </html>

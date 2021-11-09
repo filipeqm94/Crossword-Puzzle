@@ -2,6 +2,42 @@ body {
   font-family: sans-serif;
 }
 
+header {
+  text-align: center;
+}
+
+main {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+main section {
+  margin: 10px;
+}
+
+main section#side {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
 #puzzleGrid {
   display: -ms-grid;
   display: grid;
@@ -96,4 +132,3 @@ button:active {
   -webkit-transform: translate(2px, 2px);
           transform: translate(2px, 2px);
 }
-/*# sourceMappingURL=main.css.map */
