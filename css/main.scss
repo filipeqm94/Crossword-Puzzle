@@ -7,3 +7,22 @@ td {
     background-color: black;
   }
 }
+
+main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  h2 {
+    text-align: center;
+  }
+
+  table,
+  aside {
+    margin: 10px;
+  }
+
+  aside div {
+    display: flex;
+  }
+}

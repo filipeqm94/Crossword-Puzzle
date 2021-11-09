@@ -8,76 +8,79 @@
     <link rel="stylesheet" href="./css/main.css" />
   </head>
   <body>
-    <table id="cwPuzzle">
-      <thead>
-        Crossword Puzzle
-      </thead>
-      <tbody>
-        <tr>
-          <td><span data-letter="R"></span></td>
-          <td><span data-letter="E"></span></td>
-          <td><span data-letter="I"></span></td>
-          <td><span data-letter="D"></span></td>
-          <td class="disabled"></td>
-        </tr>
-        <tr>
-          <td><span data-letter="B"></span></td>
-          <td><span data-letter="A"></span></td>
-          <td><span data-letter="K"></span></td>
-          <td><span data-letter="U"></span></td>
-          <td class="disabled"></td>
-        </tr>
-        <tr>
-          <td><span data-letter="G"></span></td>
-          <td><span data-letter="R"></span></td>
-          <td><span data-letter="E"></span></td>
-          <td><span data-letter="E"></span></td>
-          <td><span data-letter="N"></span></td>
-        </tr>
-        <tr>
-          <td class="disabled"></td>
-          <td><span data-letter="L"></span></td>
-          <td><span data-letter="E"></span></td>
-          <td><span data-letter="T"></span></td>
-          <td><span data-letter="O"></span></td>
-        </tr>
-        <tr>
-          <td class="disabled"></td>
-          <td><span data-letter="S"></span></td>
-          <td><span data-letter="P"></span></td>
-          <td><span data-letter="O"></span></td>
-          <td><span data-letter="T"></span></td>
-        </tr>
-      </tbody>
-    </table>
+    <header>
+      <h1>Crossword Puzzle</h1>
+    </header>
 
-    <aside id="clues">
-      <h2>Clues</h2>
-      <div>
-        <section>
-          <h3>Across</h3>
-          <ol id="across">
-            <li value="1">Tara of "Sharknado"</li>
-            <li value="5">Capital of Azerbaijan</li>
-            <li value="6">Yellow mixed with blue</li>
-            <li value="8">"Prefontaine" star Jared</li>
-            <li value="9">Help a wightlifter</li>
-          </ol>
-        </section>
-        <section>
-          <h3>Down</h3>
-          <ol id="down">
-            <li value="1">"Notorious" Supreme Court monogram</li>
-            <li value="2">British nobles</li>
-            <li value="3">
-              "_____ on fallin' in and out of love ..." (Alicia keys)
-            </li>
-            <li value="4">Because of</li>
-            <li value="7">Commandment word</li>
-          </ol>
-        </section>
-      </div>
-    </aside>
+    <main>
+      <table id="cwPuzzle">
+        <tbody>
+          <tr>
+            <td><span data-letter="R"></span></td>
+            <td><span data-letter="E"></span></td>
+            <td><span data-letter="I"></span></td>
+            <td><span data-letter="D"></span></td>
+            <td class="disabled"></td>
+          </tr>
+          <tr>
+            <td><span data-letter="B"></span></td>
+            <td><span data-letter="A"></span></td>
+            <td><span data-letter="K"></span></td>
+            <td><span data-letter="U"></span></td>
+            <td class="disabled"></td>
+          </tr>
+          <tr>
+            <td><span data-letter="G"></span></td>
+            <td><span data-letter="R"></span></td>
+            <td><span data-letter="E"></span></td>
+            <td><span data-letter="E"></span></td>
+            <td><span data-letter="N"></span></td>
+          </tr>
+          <tr>
+            <td class="disabled"></td>
+            <td><span data-letter="L"></span></td>
+            <td><span data-letter="E"></span></td>
+            <td><span data-letter="T"></span></td>
+            <td><span data-letter="O"></span></td>
+          </tr>
+          <tr>
+            <td class="disabled"></td>
+            <td><span data-letter="S"></span></td>
+            <td><span data-letter="P"></span></td>
+            <td><span data-letter="O"></span></td>
+            <td><span data-letter="T"></span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <aside id="clues">
+        <h2>Clues</h2>
+        <div>
+          <section>
+            <h3>Across</h3>
+            <ol id="across">
+              <li value="1">Tara of "Sharknado"</li>
+              <li value="5">Capital of Azerbaijan</li>
+              <li value="6">Yellow mixed with blue</li>
+              <li value="8">"Prefontaine" star Jared</li>
+              <li value="9">Help a wightlifter</li>
+            </ol>
+          </section>
+          <section>
+            <h3>Down</h3>
+            <ol id="down">
+              <li value="1">"Notorious" Supreme Court monogram</li>
+              <li value="2">British nobles</li>
+              <li value="3">
+                "_____ on fallin' in and out of love ..." (Alicia keys)
+              </li>
+              <li value="4">Because of</li>
+              <li value="7">Commandment word</li>
+            </ol>
+          </section>
+        </div>
+      </aside>
+    </main>
 
     <script src="./app.js" defer></script>
   </body>
