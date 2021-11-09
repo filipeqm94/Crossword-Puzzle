@@ -1,0 +1,84 @@
+body {
+  font-family: sans-serif;
+}
+
+#puzzleGrid {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: (64px)[7];
+      grid-template-rows: repeat(7, 64px);
+}
+
+.row {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (64px)[10];
+      grid-template-columns: repeat(10, 64px);
+}
+
+.cell {
+  position: relative;
+  outline: none;
+  border: 1px solid black;
+  border-radius: 0%;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 24px;
+}
+
+.cell.disabled {
+  background-color: black;
+}
+
+.cell::-webkit-input-placeholder {
+  position: absolute;
+  color: black;
+  font-size: 18px;
+}
+
+.cell:-ms-input-placeholder {
+  position: absolute;
+  color: black;
+  font-size: 18px;
+}
+
+.cell::-ms-input-placeholder {
+  position: absolute;
+  color: black;
+  font-size: 18px;
+}
+
+.cell::placeholder {
+  position: absolute;
+  color: black;
+  font-size: 18px;
+}
+
+#winnerModal {
+  background-color: rgba(0, 0, 0, 0.4);
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: 1;
+  overflow: auto;
+  display: none;
+}
+
+#winnerModal #modal-text-box {
+  background-color: white;
+  width: 550px;
+  border-radius: 2px;
+  margin: 150px auto;
+  padding: 1em;
+  -webkit-box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.2);
+          box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+button {
+  background-color: white;
+  padding: 10px;
+}
+/*# sourceMappingURL=main.css.map */
