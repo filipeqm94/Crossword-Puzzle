@@ -42,3 +42,4 @@ As a user I want to:
 #### Stretch Goals 2.0
 
 - [ ] Highlight clues associated with row/column
+- [ ] User should be able to move through puzzle with directional keyboard beys
