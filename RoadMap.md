@@ -38,3 +38,7 @@ As a user I want to:
   - [ ] Give player a "Retry" option and clear all guesses on "Hard" if not all of the answers are correct.
 - [ ] Place words randomly inside the puzzle each time the page is loaded.
 - [ ] Add "Topics" using API calls to some sort of "Fun Fact API" (if I can find a free one 🤣 ).
+
+#### Stretch Goals 2.0
+
+- [ ] Highlight clues associated with row/column
