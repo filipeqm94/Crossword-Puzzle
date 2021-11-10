@@ -135,6 +135,20 @@ function showDirections() {
   currentCell.style.backgroundColor = "lightblue";
 }
 
+function checkAnswers() {
+  cells.forEach((cell) => {
+    const [posX, posY] = cell.id.split("-");
+    const answer = grid[+posX][+posY];
+    const letter = cell.querySelector(".letter");
+
+    if (answer === letter.textContent) {
+      letter.style.color = `green`;
+    } else {
+      letter.style.color = `red`;
+    }
+  });
+}
+
 function changeByClick(event) {
   const parentNode = event.target.parentNode;
 
@@ -150,5 +164,6 @@ function changeByClick(event) {
 cells.forEach((cell) => cell.addEventListener(`click`, changeByClick));
 
 document.addEventListener(`keydown`, keyEvents);
+checkButton.addEventListener(`click`, checkAnswers);
 
 showDirections();
