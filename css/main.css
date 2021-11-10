@@ -29,25 +29,37 @@ main aside {
 main #puzzle {
   display: -ms-grid;
   display: grid;
-  -ms-grid-rows: (74px)[5];
-  -ms-grid-columns: (74px)[5];
-      grid-template: repeat(5, 74px)/repeat(5, 74px);
+  border: 1px solid black;
+  border-radius: 5px;
 }
 
 main #puzzle .cell {
+  position: relative;
   background-color: white;
   width: 100%;
   height: 100%;
   border: 1px solid black;
+  border-radius: 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-size: 2.5rem;
+}
+
+main #puzzle .cell span {
+  position: absolute;
+  top: 0;
+  left: 2px;
+  font-size: 1.3rem;
 }
 
 main #puzzle .disabled {
   border: 1px solid black;
   background-color: black;
-}
-
-main aside div {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
 }
