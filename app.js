@@ -26,17 +26,24 @@ for (let i = 0; i < grid.length; i++) {
       if (grid[i][j].length > 1) {
         const clueNumber = document.createElement(`span`);
         clueNumber.innerText = grid[i][j][1];
+        clueNumber.classList.add(`clueNumber`);
+
         cell.appendChild(clueNumber);
 
         grid[i][j] = grid[i][j][0];
       }
       cell.classList.add("cell");
 
+      const letter = document.createElement("span");
+      letter.classList.add("letter");
+
+      cell.appendChild(letter);
+
       if (grid[i][j - 1] || grid[i][j + 1]) {
-        cell.setAttribute(`data-acrossClue`, `across${i + 1}`);
+        cell.setAttribute(`data-across-clue`, `across${i + 1}`);
       }
       if (grid[i - 1] || grid[i + 1]) {
-        cell.setAttribute(`data-downClue`, `down${j + 1}`);
+        cell.setAttribute(`data-down-clue`, `down${j + 1}`);
       }
 
       cell.setAttribute(`id`, `${i}-${j}`);
@@ -69,3 +76,47 @@ for (let i = 0; i < grid.length; i++) {
 }
 
 currentCell = cells[0];
+
+document.addEventListener(`keydown`, (event) => {
+  showDirections();
+
+  const key = event.code;
+  currentCellLetter = currentCell.querySelector(`.letter`);
+  if (key.includes(`Key`)) {
+    currentCellLetter.innerText = key.replace(`Key`, ``);
+  }
+
+  if (key === `ArrowUp` && currentCell.dataset.up) {
+    currentCell = document.getElementById(`${currentCell.dataset.up}`);
+    showDirections();
+  } else if (key === `ArrowRight` && currentCell.dataset.right) {
+    currentCell = document.getElementById(`${currentCell.dataset.right}`);
+    showDirections();
+  } else if (key === `ArrowDown` && currentCell.dataset.down) {
+    currentCell = document.getElementById(`${currentCell.dataset.down}`);
+    showDirections();
+  } else if (key === `ArrowLeft` && currentCell.dataset.left) {
+    currentCell = document.getElementById(`${currentCell.dataset.left}`);
+    showDirections();
+  }
+});
+
+function showDirections() {
+  const acrossClue = currentCell.dataset.acrossClue;
+  const downClue = currentCell.dataset.downClue;
+
+  cells.forEach((cell) => {
+    if (
+      cell.dataset.acrossClue === acrossClue ||
+      cell.dataset.downClue === downClue
+    ) {
+      cell.style.backgroundColor = `yellow`;
+    } else {
+      cell.style.backgroundColor = `#fff`;
+    }
+  });
+
+  currentCell.style.backgroundColor = "lightblue";
+}
+
+showDirections();

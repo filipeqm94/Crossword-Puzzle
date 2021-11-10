@@ -52,7 +52,7 @@ main #puzzle .cell {
   font-size: 2.5rem;
 }
 
-main #puzzle .cell span {
+main #puzzle .cell .clueNumber {
   position: absolute;
   top: 0;
   left: 2px;
