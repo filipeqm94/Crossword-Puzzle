@@ -7,6 +7,7 @@ const grid = [
 ];
 
 const puzzle = document.querySelector(`#puzzle`);
+const checkButton = document.querySelector("#checkButton");
 const clues = document.querySelectorAll("li.clue");
 
 const cells = [];
@@ -24,8 +25,8 @@ for (let i = 0; i < grid.length; i++) {
 
     if (grid[i][j] !== ``) {
       if (grid[i][j].length > 1) {
-        const clueNumber = document.createElement(`span`);
-        clueNumber.innerText = grid[i][j][1];
+        const clueNumber = document.createElement(`sup`);
+        clueNumber.textContent = grid[i][j][1];
         clueNumber.classList.add(`clueNumber`);
 
         cell.appendChild(clueNumber);
@@ -77,13 +78,28 @@ for (let i = 0; i < grid.length; i++) {
 
 currentCell = cells[0];
 
-document.addEventListener(`keydown`, (event) => {
-  showDirections();
-
+function keyEvents(event) {
   const key = event.code;
   currentCellLetter = currentCell.querySelector(`.letter`);
+
+  showDirections();
+
   if (key.includes(`Key`)) {
-    currentCellLetter.innerText = key.replace(`Key`, ``);
+    currentCellLetter.textContent = key.replace(`Key`, ``);
+
+    currentCellLetter.style.color = `black`;
+
+    if (currentCell.dataset.right) {
+      currentCell = document.getElementById(`${currentCell.dataset.right}`);
+      showDirections();
+    } else if (currentCell.dataset.down) {
+      currentCell = document.getElementById(`${currentCell.dataset.down}`);
+      showDirections();
+    }
+  }
+
+  if (key === `Backspace` || key === `Delete`) {
+    currentCellLetter.textContent = ``;
   }
 
   if (key === `ArrowUp` && currentCell.dataset.up) {
@@ -99,7 +115,7 @@ document.addEventListener(`keydown`, (event) => {
     currentCell = document.getElementById(`${currentCell.dataset.left}`);
     showDirections();
   }
-});
+}
 
 function showDirections() {
   const acrossClue = currentCell.dataset.acrossClue;
@@ -118,5 +134,21 @@ function showDirections() {
 
   currentCell.style.backgroundColor = "lightblue";
 }
+
+function changeByClick(event) {
+  const parentNode = event.target.parentNode;
+
+  if ([...parentNode.classList].includes(`cell`)) {
+    currentCell = parentNode;
+    showDirections();
+  } else {
+    currentCell = event.target;
+    showDirections();
+  }
+}
+
+cells.forEach((cell) => cell.addEventListener(`click`, changeByClick));
+
+document.addEventListener(`keydown`, keyEvents);
 
 showDirections();
