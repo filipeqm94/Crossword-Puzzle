@@ -51,10 +51,8 @@ function keyEvents(event) {
   } else if (key === `Backspace` || key === `Delete`) {
     //delete leter if backspace or delete are pressed
     currentCellLetter.textContent = ``;
-  }
-
-  //checks if cell has directional and move current cell to specified direction
-  if (key === `ArrowUp` && currentCell.dataset.up) {
+  } else if (key === `ArrowUp` && currentCell.dataset.up) {
+    //checks if cell has directional and move current cell to specified direction
     currentCell = document.getElementById(`${currentCell.dataset.up}`);
     showDirections();
   } else if (key === `ArrowRight` && currentCell.dataset.right) {
