@@ -81,6 +81,11 @@ main aside h3 {
   margin-top: 10px;
 }
 
+main aside li.clue.complete {
+  text-decoration: line-through;
+  color: darkgrey;
+}
+
 #modal {
   position: fixed;
   width: 100vw;

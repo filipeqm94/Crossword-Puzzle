@@ -95,10 +95,11 @@ function keyEvents(event) {
     if (currentCell.dataset.right) {
       currentCell = document.getElementById(`${currentCell.dataset.right}`);
       showDirections();
-    } else if (currentCell.dataset.down) {
-      currentCell = document.getElementById(`${currentCell.dataset.down}`);
-      showDirections();
     }
+    // else if (currentCell.dataset.down) {
+    //   currentCell = document.getElementById(`${currentCell.dataset.down}`);
+    //   showDirections();
+    // }
   }
 
   if (key === `Backspace` || key === `Delete`) {
@@ -157,11 +158,106 @@ function checkAnswers() {
   if (rightGuesses.length === cells.length) {
     winnerModal.style.display = "flex";
   }
+
+  //cross out corret clues
+  //across
+  const acrosses = [
+    autoFilter(`across`, 1),
+    autoFilter(`across`, 2),
+    autoFilter(`across`, 3),
+    autoFilter(`across`, 4),
+    autoFilter(`across`, 5),
+  ];
+
+  const acrossCompare = [];
+
+  for (let i = 0; i < acrosses.length; i++) {
+    acrossCompare.push(
+      acrosses[i].filter((cell) => {
+        const [posX, posY] = cell.id.split("-");
+        const answer = grid[+posX][+posY];
+        const letter = cell.querySelector(".letter");
+
+        if (answer === letter.textContent) {
+          return cell;
+        }
+      })
+    );
+  }
+
+  for (let i = 0; i < acrosses.length; i++) {
+    const clue = [...clues].filter(
+      (clue) => clue.dataset.clue === `across${i + 1}`
+    )[0];
+
+    if (acrossCompare[i].length === acrosses[i].length) {
+      clue.classList.add(`complete`);
+    } else {
+      clue.classList.remove(`complete`);
+    }
+  }
+
+  //down
+  const downs = [
+    autoFilter(`down`, 1),
+    autoFilter(`down`, 2),
+    autoFilter(`down`, 3),
+    autoFilter(`down`, 4),
+    autoFilter(`down`, 5),
+  ];
+
+  const downCompare = [];
+
+  for (let i = 0; i < downs.length; i++) {
+    downCompare.push(
+      downs[i].filter((cell) => {
+        const [posX, posY] = cell.id.split("-");
+        const answer = grid[+posX][+posY];
+        const letter = cell.querySelector(".letter");
+
+        if (answer === letter.textContent) {
+          return cell;
+        }
+      })
+    );
+  }
+
+  for (let i = 0; i < downs.length; i++) {
+    const clue = [...clues].filter(
+      (clue) => clue.dataset.clue === `down${i + 1}`
+    )[0];
+
+    if (downCompare[i].length === downs[i].length) {
+      clue.classList.add(`complete`);
+    } else {
+      clue.classList.remove(`complete`);
+    }
+  }
+}
+
+function autoFilter(direc, num) {
+  let direction = ``;
+  switch (direc) {
+    case `across`: {
+      direction = direc;
+    }
+    case `down`: {
+      direction = direc;
+    }
+  }
+
+  return [...cells].filter(
+    (cell) => cell.dataset[`${direction}Clue`] === `${direction}${num}`
+  );
 }
 
 function resetGame() {
   cells.forEach((cell) => {
     cell.querySelector(`.letter`).textContent = ``;
+  });
+
+  clues.forEach((clue) => {
+    clue.classList.remove(`complete`);
   });
 
   winnerModal.style.display = `none`;
