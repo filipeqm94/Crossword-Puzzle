@@ -10,6 +10,8 @@ const puzzle = document.querySelector(`#puzzle`);
 const checkButton = document.querySelector("#checkButton");
 const clues = document.querySelectorAll("li.clue");
 
+const winnerModal = document.querySelector("#modal");
+
 const cells = [];
 
 let currentCell;
@@ -136,6 +138,8 @@ function showDirections() {
 }
 
 function checkAnswers() {
+  const rightGuesses = [];
+
   cells.forEach((cell) => {
     const [posX, posY] = cell.id.split("-");
     const answer = grid[+posX][+posY];
@@ -143,10 +147,15 @@ function checkAnswers() {
 
     if (answer === letter.textContent) {
       letter.style.color = `green`;
+      rightGuesses.push(cell);
     } else {
       letter.style.color = `red`;
     }
   });
+
+  if (rightGuesses.length === cells.length) {
+    winnerModal.style.display = "flex";
+  }
 }
 
 function changeByClick(event) {

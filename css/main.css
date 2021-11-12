@@ -85,6 +85,7 @@ main #puzzle .disabled {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  display: none;
 }
 
 #modal #winnerMessage {
