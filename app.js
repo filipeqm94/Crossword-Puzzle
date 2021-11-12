@@ -1,3 +1,4 @@
+// puzzle grid
 const grid = [
   [`R1`, `E2`, `I3`, `D4`, ``],
   [`B5`, `A`, `K`, `U`, ``],
@@ -6,92 +7,39 @@ const grid = [
   [``, `S9`, `P`, `O`, `T`],
 ];
 
+// variables
+// const
 const puzzle = document.querySelector(`#puzzle`);
 const checkButton = document.querySelector("#checkButton");
 const clues = document.querySelectorAll("li.clue");
-
 const winnerModal = document.querySelector(`#modal`);
 const resetButton = document.querySelector(`#gameReset`);
 
 const cells = [];
 
-let currentCell;
-
 const rows = grid.length;
 const columns = grid[0].length;
 
-puzzle.style.gridTemplate = `repeat(${rows}, 74px) / repeat(${columns}, 74px)`;
+//changeables
+let currentCell;
 
-for (let i = 0; i < grid.length; i++) {
-  for (let j = 0; j < grid[i].length; j++) {
-    const cell = document.createElement(`div`);
-
-    if (grid[i][j] !== ``) {
-      if (grid[i][j].length > 1) {
-        const clueNumber = document.createElement(`sup`);
-        clueNumber.textContent = grid[i][j][1];
-        clueNumber.classList.add(`clueNumber`);
-
-        cell.appendChild(clueNumber);
-
-        grid[i][j] = grid[i][j][0];
-      }
-      cell.classList.add("cell");
-
-      const letter = document.createElement("span");
-      letter.classList.add("letter");
-
-      cell.appendChild(letter);
-
-      if (grid[i][j - 1] || grid[i][j + 1]) {
-        cell.setAttribute(`data-across-clue`, `across${i + 1}`);
-      }
-      if (grid[i - 1] || grid[i + 1]) {
-        cell.setAttribute(`data-down-clue`, `down${j + 1}`);
-      }
-
-      cell.setAttribute(`id`, `${i}-${j}`);
-
-      //set directionals
-      //up
-      if (grid[i - 1] && grid[i - 1][j] !== ``) {
-        cell.setAttribute(`data-up`, `${i - 1}-${j}`);
-      }
-      //right
-      if (grid[i][j + 1]) {
-        cell.setAttribute(`data-right`, `${i}-${j + 1}`);
-      }
-      //down
-      if (grid[i + 1] && grid[i + 1][j] !== ``) {
-        cell.setAttribute(`data-down`, `${i + 1}-${j}`);
-      }
-      //left
-      if (grid[i][j - 1]) {
-        cell.setAttribute(`data-left`, `${i}-${j - 1}`);
-      }
-
-      cells.push(cell);
-    } else {
-      cell.classList.add("disabled");
-    }
-
-    puzzle.appendChild(cell);
-  }
-}
-
-currentCell = cells[0];
-
+//functions
+//arrowkey navigation
 function keyEvents(event) {
+  //grab key event
   const key = event.code;
   currentCellLetter = currentCell.querySelector(`.letter`);
 
   showDirections();
 
   if (key.includes(`Key`)) {
+    //set letter to key pressed
     currentCellLetter.textContent = key.replace(`Key`, ``);
 
+    //set colot back to black if color was different (for when user changes the their guess after pressing check answer)
     currentCellLetter.style.color = `black`;
 
+    //auto move current cell to the next one after it has been populated
     if (currentCell.dataset.right) {
       currentCell = document.getElementById(`${currentCell.dataset.right}`);
       showDirections();
@@ -100,12 +48,12 @@ function keyEvents(event) {
     //   currentCell = document.getElementById(`${currentCell.dataset.down}`);
     //   showDirections();
     // }
-  }
-
-  if (key === `Backspace` || key === `Delete`) {
+  } else if (key === `Backspace` || key === `Delete`) {
+    //delete leter if backspace or delete are pressed
     currentCellLetter.textContent = ``;
   }
 
+  //checks if cell has directional and move current cell to specified direction
   if (key === `ArrowUp` && currentCell.dataset.up) {
     currentCell = document.getElementById(`${currentCell.dataset.up}`);
     showDirections();
@@ -121,6 +69,7 @@ function keyEvents(event) {
   }
 }
 
+//format the board to show the across and down
 function showDirections() {
   const acrossClue = currentCell.dataset.acrossClue;
   const downClue = currentCell.dataset.downClue;
@@ -139,6 +88,7 @@ function showDirections() {
   currentCell.style.backgroundColor = "lightblue";
 }
 
+//check answers
 function checkAnswers() {
   const rightGuesses = [];
 
@@ -235,6 +185,7 @@ function checkAnswers() {
   }
 }
 
+//filter function
 function autoFilter(direc, num) {
   let direction = ``;
   switch (direc) {
@@ -251,6 +202,7 @@ function autoFilter(direc, num) {
   );
 }
 
+//reset functionality
 function resetGame() {
   cells.forEach((cell) => {
     cell.querySelector(`.letter`).textContent = ``;
@@ -266,6 +218,7 @@ function resetGame() {
   showDirections();
 }
 
+//change curremt cell by click
 function changeByClick(event) {
   const parentNode = event.target.parentNode;
 
@@ -277,6 +230,80 @@ function changeByClick(event) {
     showDirections();
   }
 }
+
+//script
+//add grid template to board
+puzzle.style.gridTemplate = `repeat(${rows}, 74px) / repeat(${columns}, 74px)`;
+
+//adding letter + disabled cells
+for (let i = 0; i < grid.length; i++) {
+  for (let j = 0; j < grid[i].length; j++) {
+    //create cell
+    const cell = document.createElement(`div`);
+
+    //add proprierties to valid cells
+    if (grid[i][j] !== ``) {
+      //checks if cell has a number associated with it
+      if (grid[i][j].length > 1) {
+        //add clue number to cell
+        const clueNumber = document.createElement(`sup`);
+        clueNumber.textContent = grid[i][j][1];
+        clueNumber.classList.add(`clueNumber`);
+
+        cell.appendChild(clueNumber);
+
+        //separate number and letter
+        grid[i][j] = grid[i][j][0];
+      }
+      cell.classList.add("cell");
+
+      //create letter span
+      const letter = document.createElement("span");
+      letter.classList.add("letter");
+
+      cell.appendChild(letter);
+
+      //adds across clue attribute to cells that have at least one valid cell next to it
+      if (grid[i][j - 1] || grid[i][j + 1]) {
+        cell.setAttribute(`data-across-clue`, `across${i + 1}`);
+      }
+      //adds down clue attribute to cells that have at least one valid cell above or below it
+      if (grid[i - 1] || grid[i + 1]) {
+        cell.setAttribute(`data-down-clue`, `down${j + 1}`);
+      }
+
+      //git it their id associated with the position on the grid
+      cell.setAttribute(`id`, `${i}-${j}`);
+
+      //set directionals data to cells if they have cells around them
+      //up
+      if (grid[i - 1] && grid[i - 1][j] !== ``) {
+        cell.setAttribute(`data-up`, `${i - 1}-${j}`);
+      }
+      //right
+      if (grid[i][j + 1]) {
+        cell.setAttribute(`data-right`, `${i}-${j + 1}`);
+      }
+      //down
+      if (grid[i + 1] && grid[i + 1][j] !== ``) {
+        cell.setAttribute(`data-down`, `${i + 1}-${j}`);
+      }
+      //left
+      if (grid[i][j - 1]) {
+        cell.setAttribute(`data-left`, `${i}-${j - 1}`);
+      }
+
+      cells.push(cell);
+    } else {
+      cell.classList.add("disabled");
+    }
+
+    puzzle.appendChild(cell);
+  }
+}
+
+//set current cell to the first cell in the grid
+currentCell = cells[0];
 
 cells.forEach((cell) => cell.addEventListener(`click`, changeByClick));
 
