@@ -8,6 +8,10 @@ body {
   font-family: sans-serif;
 
   position: relative;
+
+  h1 {
+    text-align: center;
+  }
 }
 
 main {
@@ -17,11 +21,6 @@ main {
 
   h2 {
     text-align: center;
-  }
-
-  #puzzle,
-  aside {
-    margin: 10px;
   }
 
   #puzzle {
@@ -60,6 +59,18 @@ main {
     .disabled {
       border: 1px solid black;
       background-color: black;
+    }
+  }
+
+  aside {
+    margin: 50px;
+
+    h2 {
+      text-align: left;
+    }
+
+    h3 {
+      margin-top: 10px;
     }
   }
 }
