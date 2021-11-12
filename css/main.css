@@ -143,3 +143,7 @@ button:active {
   -webkit-box-shadow: none;
           box-shadow: none;
 }
+
+footer {
+  text-align: center;
+}
