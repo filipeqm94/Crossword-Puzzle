@@ -10,7 +10,8 @@ const puzzle = document.querySelector(`#puzzle`);
 const checkButton = document.querySelector("#checkButton");
 const clues = document.querySelectorAll("li.clue");
 
-const winnerModal = document.querySelector("#modal");
+const winnerModal = document.querySelector(`#modal`);
+const resetButton = document.querySelector(`#gameReset`);
 
 const cells = [];
 
@@ -158,6 +159,17 @@ function checkAnswers() {
   }
 }
 
+function resetGame() {
+  cells.forEach((cell) => {
+    cell.querySelector(`.letter`).textContent = ``;
+  });
+
+  winnerModal.style.display = `none`;
+
+  currentCell = cells[0];
+  showDirections();
+}
+
 function changeByClick(event) {
   const parentNode = event.target.parentNode;
 
@@ -174,5 +186,7 @@ cells.forEach((cell) => cell.addEventListener(`click`, changeByClick));
 
 document.addEventListener(`keydown`, keyEvents);
 checkButton.addEventListener(`click`, checkAnswers);
+
+resetButton.addEventListener(`click`, resetGame);
 
 showDirections();
