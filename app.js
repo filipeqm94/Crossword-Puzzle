@@ -1,231 +1,288 @@
-const puzzleGrid = document.querySelector("#puzzleGrid");
-const checkAnswer = document.querySelector("#checkAnswers");
-const hints = document.querySelector("#hints");
-const winnerModal = document.querySelector(`#winnerModal`);
-const resetGame = document.querySelector("#resetGame");
+const grid = [
+  [`R1`, `E2`, `I3`, `D4`, ``],
+  [`B5`, `A`, `K`, `U`, ``],
+  [`G6`, `R`, `E`, `E`, `N7`],
+  [``, `L8`, `E`, `T`, `O`],
+  [``, `S9`, `P`, `O`, `T`],
+];
 
-const answers = {
-  answer1: [
-    [3, 0],
-    [3, 1],
-    [3, 2],
-    [3, 3],
-    [3, 4],
-  ],
-  answer2: [
-    [2, 4],
-    [3, 4],
-    [4, 4],
-    [5, 4],
-    [6, 4],
-  ],
-  answer3: [
-    [0, 7],
-    [1, 7],
-    [2, 7],
-    [3, 7],
-    [4, 7],
-  ],
-  answer4: [
-    [2, 6],
-    [2, 7],
-    [2, 8],
-    [2, 9],
-  ],
-  answer5: [
-    [4, 2],
-    [4, 3],
-    [4, 4],
-    [4, 5],
-    [4, 6],
-    [4, 7],
-  ],
-};
+const puzzle = document.querySelector(`#puzzle`);
+const checkButton = document.querySelector("#checkButton");
+const clues = document.querySelectorAll("li.clue");
 
-//create a loop to create the amount of rows needed for the puzzle board
-for (let i = 0; i < 7; i++) {
-  //create row
-  const row = document.createElement("div");
-  row.classList.add("row"); // add .row styles to row
-  //create a loop for the amount of columns each row will have
-  for (let j = 0; j < 10; j++) {
-    //create column
-    const column = document.createElement("input");
+const winnerModal = document.querySelector(`#modal`);
+const resetButton = document.querySelector(`#gameReset`);
 
-    column.setAttribute("maxlength", "1"); //add limit to input
-    column.classList.add("cell"); //add .cell styles to column
+const cells = [];
 
-    //add data set with the value of the letter to cells that will be available
-    addDataSet(i, j, column);
+let currentCell;
 
-    //disable cells with no data set
-    if (!column.dataset.letter) {
-      column.classList.add("disabled");
+const rows = grid.length;
+const columns = grid[0].length;
+
+puzzle.style.gridTemplate = `repeat(${rows}, 74px) / repeat(${columns}, 74px)`;
+
+for (let i = 0; i < grid.length; i++) {
+  for (let j = 0; j < grid[i].length; j++) {
+    const cell = document.createElement(`div`);
+
+    if (grid[i][j] !== ``) {
+      if (grid[i][j].length > 1) {
+        const clueNumber = document.createElement(`sup`);
+        clueNumber.textContent = grid[i][j][1];
+        clueNumber.classList.add(`clueNumber`);
+
+        cell.appendChild(clueNumber);
+
+        grid[i][j] = grid[i][j][0];
+      }
+      cell.classList.add("cell");
+
+      const letter = document.createElement("span");
+      letter.classList.add("letter");
+
+      cell.appendChild(letter);
+
+      if (grid[i][j - 1] || grid[i][j + 1]) {
+        cell.setAttribute(`data-across-clue`, `across${i + 1}`);
+      }
+      if (grid[i - 1] || grid[i + 1]) {
+        cell.setAttribute(`data-down-clue`, `down${j + 1}`);
+      }
+
+      cell.setAttribute(`id`, `${i}-${j}`);
+
+      //set directionals
+      //up
+      if (grid[i - 1] && grid[i - 1][j] !== ``) {
+        cell.setAttribute(`data-up`, `${i - 1}-${j}`);
+      }
+      //right
+      if (grid[i][j + 1]) {
+        cell.setAttribute(`data-right`, `${i}-${j + 1}`);
+      }
+      //down
+      if (grid[i + 1] && grid[i + 1][j] !== ``) {
+        cell.setAttribute(`data-down`, `${i + 1}-${j}`);
+      }
+      //left
+      if (grid[i][j - 1]) {
+        cell.setAttribute(`data-left`, `${i}-${j - 1}`);
+      }
+
+      cells.push(cell);
+    } else {
+      cell.classList.add("disabled");
     }
 
-    //append column to row
-    row.appendChild(column);
-  }
-  //append row to grid
-  puzzleGrid.appendChild(row);
-}
-
-function addDataSet(i, j, element) {
-  //hello
-  if (i === 3 && j === 0) {
-    element.setAttribute("data-letter", "h");
-    element.setAttribute("placeholder", "1");
-  } else if (i === 3 && j === 1) {
-    element.setAttribute("data-letter", "e");
-  } else if (i === 3 && j === 2) {
-    element.setAttribute("data-letter", "l");
-  } else if (i === 3 && j === 3) {
-    element.setAttribute("data-letter", "l");
-  } else if (i === 3 && j === 4) {
-    element.setAttribute("data-letter", "o");
-  }
-
-  //world
-  else if (i === 2 && j === 4) {
-    element.setAttribute("data-letter", "w");
-    element.setAttribute("placeholder", "2");
-  } else if (i === 4 && j === 4) {
-    element.setAttribute("data-letter", "r");
-  } else if (i === 5 && j === 4) {
-    element.setAttribute("data-letter", "l");
-  } else if (i === 6 && j === 4) {
-    element.setAttribute("data-letter", "d");
-  }
-
-  //react
-  else if (i === 0 && j === 7) {
-    element.setAttribute("data-letter", "r");
-    element.setAttribute("placeholder", "3");
-  } else if (i === 1 && j === 7) {
-    element.setAttribute("data-letter", "e");
-  } else if (i === 2 && j === 7) {
-    element.setAttribute("data-letter", "a");
-  } else if (i === 3 && j === 7) {
-    element.setAttribute("data-letter", "c");
-  } else if (i === 4 && j === 7) {
-    element.setAttribute("data-letter", "t");
-  }
-
-  //java
-  else if (i === 2 && j === 6) {
-    element.setAttribute("data-letter", "j");
-    element.setAttribute("placeholder", "4");
-  } else if (i === 2 && j === 8) {
-    element.setAttribute("data-letter", "v");
-  } else if (i === 2 && j === 9) {
-    element.setAttribute("data-letter", "a");
-  }
-
-  //script
-  else if (i === 4 && j === 2) {
-    element.setAttribute("data-letter", "s");
-    element.setAttribute("placeholder", "5");
-  } else if (i === 4 && j === 3) {
-    element.setAttribute("data-letter", "c");
-  } else if (i === 4 && j === 5) {
-    element.setAttribute("data-letter", "i");
-  } else if (i === 4 && j === 6) {
-    element.setAttribute("data-letter", "p");
+    puzzle.appendChild(cell);
   }
 }
 
-//check answer
-function answerCheck() {
-  const rightAnswers = [];
+currentCell = cells[0];
 
-  puzzleGrid.childNodes.forEach((row) => {
-    for (let i = 0; i < row.childNodes.length; i++) {
-      if (
-        row.childNodes[i].dataset.letter ===
-        row.childNodes[i].value.toLowerCase()
-      ) {
-        row.childNodes[i].style.border = "3px solid green";
-        row.childNodes[i].style.backgroundColor = "#00ff0050";
-        rightAnswers.push(row.childNodes[i]);
-      }
+function keyEvents(event) {
+  const key = event.code;
+  currentCellLetter = currentCell.querySelector(`.letter`);
+
+  showDirections();
+
+  if (key.includes(`Key`)) {
+    currentCellLetter.textContent = key.replace(`Key`, ``);
+
+    currentCellLetter.style.color = `black`;
+
+    if (currentCell.dataset.right) {
+      currentCell = document.getElementById(`${currentCell.dataset.right}`);
+      showDirections();
+    }
+    // else if (currentCell.dataset.down) {
+    //   currentCell = document.getElementById(`${currentCell.dataset.down}`);
+    //   showDirections();
+    // }
+  }
+
+  if (key === `Backspace` || key === `Delete`) {
+    currentCellLetter.textContent = ``;
+  }
+
+  if (key === `ArrowUp` && currentCell.dataset.up) {
+    currentCell = document.getElementById(`${currentCell.dataset.up}`);
+    showDirections();
+  } else if (key === `ArrowRight` && currentCell.dataset.right) {
+    currentCell = document.getElementById(`${currentCell.dataset.right}`);
+    showDirections();
+  } else if (key === `ArrowDown` && currentCell.dataset.down) {
+    currentCell = document.getElementById(`${currentCell.dataset.down}`);
+    showDirections();
+  } else if (key === `ArrowLeft` && currentCell.dataset.left) {
+    currentCell = document.getElementById(`${currentCell.dataset.left}`);
+    showDirections();
+  }
+}
+
+function showDirections() {
+  const acrossClue = currentCell.dataset.acrossClue;
+  const downClue = currentCell.dataset.downClue;
+
+  cells.forEach((cell) => {
+    if (
+      cell.dataset.acrossClue === acrossClue ||
+      cell.dataset.downClue === downClue
+    ) {
+      cell.style.backgroundColor = `yellow`;
+    } else {
+      cell.style.backgroundColor = `#fff`;
     }
   });
 
-  crossOut();
-
-  if (rightAnswers.length === 21) {
-    winnerModal.style.display = "block";
-  }
+  currentCell.style.backgroundColor = "lightblue";
 }
 
-//reset
-function reset() {
-  winnerModal.style.display = "none";
-  puzzleGrid.childNodes.forEach((row) => {
-    for (let i = 0; i < row.childNodes.length; i++) {
-      row.childNodes[i].value = ``;
-      row.childNodes[i].style.border = "1px solid black";
-      if (row.childNodes[i].classList[1] !== "disabled") {
-        row.childNodes[i].style.backgroundColor = "white";
-      }
+function checkAnswers() {
+  const rightGuesses = [];
+
+  cells.forEach((cell) => {
+    const [posX, posY] = cell.id.split("-");
+    const answer = grid[+posX][+posY];
+    const letter = cell.querySelector(".letter");
+
+    if (answer === letter.textContent) {
+      letter.style.color = `green`;
+      rightGuesses.push(cell);
+    } else {
+      letter.style.color = `red`;
     }
   });
 
-  for (let i = 1; i <= 5; i++) {
-    document.querySelector(`#hint${i}`).style.textDecoration = "none";
-    document.querySelector(`#hint${i}`).style.color = "black";
+  if (rightGuesses.length === cells.length) {
+    winnerModal.style.display = "flex";
+  }
+
+  //cross out corret clues
+  //across
+  const acrosses = [
+    autoFilter(`across`, 1),
+    autoFilter(`across`, 2),
+    autoFilter(`across`, 3),
+    autoFilter(`across`, 4),
+    autoFilter(`across`, 5),
+  ];
+
+  const acrossCompare = [];
+
+  for (let i = 0; i < acrosses.length; i++) {
+    acrossCompare.push(
+      acrosses[i].filter((cell) => {
+        const [posX, posY] = cell.id.split("-");
+        const answer = grid[+posX][+posY];
+        const letter = cell.querySelector(".letter");
+
+        if (answer === letter.textContent) {
+          return cell;
+        }
+      })
+    );
+  }
+
+  for (let i = 0; i < acrosses.length; i++) {
+    const clue = [...clues].filter(
+      (clue) => clue.dataset.clue === `across${i + 1}`
+    )[0];
+
+    if (acrossCompare[i].length === acrosses[i].length) {
+      clue.classList.add(`complete`);
+    } else {
+      clue.classList.remove(`complete`);
+    }
+  }
+
+  //down
+  const downs = [
+    autoFilter(`down`, 1),
+    autoFilter(`down`, 2),
+    autoFilter(`down`, 3),
+    autoFilter(`down`, 4),
+    autoFilter(`down`, 5),
+  ];
+
+  const downCompare = [];
+
+  for (let i = 0; i < downs.length; i++) {
+    downCompare.push(
+      downs[i].filter((cell) => {
+        const [posX, posY] = cell.id.split("-");
+        const answer = grid[+posX][+posY];
+        const letter = cell.querySelector(".letter");
+
+        if (answer === letter.textContent) {
+          return cell;
+        }
+      })
+    );
+  }
+
+  for (let i = 0; i < downs.length; i++) {
+    const clue = [...clues].filter(
+      (clue) => clue.dataset.clue === `down${i + 1}`
+    )[0];
+
+    if (downCompare[i].length === downs[i].length) {
+      clue.classList.add(`complete`);
+    } else {
+      clue.classList.remove(`complete`);
+    }
   }
 }
 
-function simplified(i, j) {
-  return (
-    puzzleGrid.childNodes[i].childNodes[j].dataset.letter ===
-    puzzleGrid.childNodes[i].childNodes[j].value.toLowerCase()
+function autoFilter(direc, num) {
+  let direction = ``;
+  switch (direc) {
+    case `across`: {
+      direction = direc;
+    }
+    case `down`: {
+      direction = direc;
+    }
+  }
+
+  return [...cells].filter(
+    (cell) => cell.dataset[`${direction}Clue`] === `${direction}${num}`
   );
 }
 
-function crossOut() {
-  const answer1 = answers.answer1.map((pos) => {
-    return simplified(pos[0], pos[1]);
+function resetGame() {
+  cells.forEach((cell) => {
+    cell.querySelector(`.letter`).textContent = ``;
   });
 
-  const answer2 = answers.answer2.map((pos) => {
-    return simplified(pos[0], pos[1]);
+  clues.forEach((clue) => {
+    clue.classList.remove(`complete`);
   });
 
-  const answer3 = answers.answer3.map((pos) => {
-    return simplified(pos[0], pos[1]);
-  });
+  winnerModal.style.display = `none`;
 
-  const answer4 = answers.answer4.map((pos) => {
-    return simplified(pos[0], pos[1]);
-  });
+  currentCell = cells[0];
+  showDirections();
+}
 
-  const answer5 = answers.answer5.map((pos) => {
-    return simplified(pos[0], pos[1]);
-  });
+function changeByClick(event) {
+  const parentNode = event.target.parentNode;
 
-  if (!answer1.includes(false)) {
-    document.querySelector("#hint1").style.textDecoration = "line-through";
-    document.querySelector("#hint1").style.color = "darkgray";
-  }
-  if (!answer2.includes(false)) {
-    document.querySelector("#hint2").style.textDecoration = "line-through";
-    document.querySelector("#hint2").style.color = "darkgray";
-  }
-  if (!answer3.includes(false)) {
-    document.querySelector("#hint3").style.textDecoration = "line-through";
-    document.querySelector("#hint3").style.color = "darkgray";
-  }
-  if (!answer4.includes(false)) {
-    document.querySelector("#hint4").style.textDecoration = "line-through";
-    document.querySelector("#hint4").style.color = "darkgray";
-  }
-  if (!answer5.includes(false)) {
-    document.querySelector("#hint5").style.textDecoration = "line-through";
-    document.querySelector("#hint5").style.color = "darkgray";
+  if ([...parentNode.classList].includes(`cell`)) {
+    currentCell = parentNode;
+    showDirections();
+  } else {
+    currentCell = event.target;
+    showDirections();
   }
 }
 
-checkAnswer.addEventListener("click", answerCheck);
-resetGame.addEventListener("click", reset);
+cells.forEach((cell) => cell.addEventListener(`click`, changeByClick));
+
+document.addEventListener(`keydown`, keyEvents);
+checkButton.addEventListener(`click`, checkAnswers);
+
+resetButton.addEventListener(`click`, resetGame);
+
+showDirections();

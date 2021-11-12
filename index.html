@@ -4,35 +4,65 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Crossword Puzzle</title>
+    <title>Document</title>
     <link rel="stylesheet" href="./css/main.css" />
   </head>
   <body>
-    <div id="winnerModal">
-      <div id="modal-text-box">
-        <h1>CONGRATULATIONS! YOU WON!</h1>
-        <button id="resetGame">RESET GAME</button>
+    <div id="modal">
+      <div id="winnerMessage">
+        <p>CONGRATULATIONS</p>
+        <p>You won!</p>
+        <button id="gameReset">RESET GAME</button>
       </div>
     </div>
+
     <header>
-      <h1>CROSSWORD PUZZLE</h1>
+      <h1>Crossword Puzzle</h1>
     </header>
+
     <main>
-      <section id="puzzleGrid"></section>
-      <section id="side">
-        <ol id="hints">
-          <li id="hint1">
-            Used as a greeting or way to begin a phone conversation.
-          </li>
-          <li id="hint2">A region or group of countries</li>
-          <li id="hint3">
-            Respond or behave in a particular way in response to something.
-          </li>
-          <li id="hint4">Coffee.</li>
-          <li id="hint5">The written text of a play, movie, or broadcast.</li>
-        </ol>
-        <button id="checkAnswers">CHECK ANSWERS</button>
-      </section>
+      <div id="puzzle"></div>
+
+      <aside id="clues">
+        <h2>Clues</h2>
+        <div>
+          <section>
+            <h3>Across</h3>
+            <ol id="across">
+              <li class="clue" value="1" data-clue="across1">
+                Tara of "Sharknado"
+              </li>
+              <li class="clue" value="5" data-clue="across2">
+                Capital of Azerbaijan
+              </li>
+              <li class="clue" value="6" data-clue="across3">
+                Yellow mixed with blue
+              </li>
+              <li class="clue" value="8" data-clue="across4">
+                "Prefontaine" star Jared
+              </li>
+              <li class="clue" value="9" data-clue="across5">
+                Help a wightlifter
+              </li>
+            </ol>
+          </section>
+          <section>
+            <h3>Down</h3>
+            <ol id="down">
+              <li class="clue" value="1" data-clue="down1">
+                "Notorious" Supreme Court monogram
+              </li>
+              <li class="clue" value="2" data-clue="down2">British nobles</li>
+              <li class="clue" value="3" data-clue="down3">
+                "_____ on fallin' in and out of love ..." (Alicia keys)
+              </li>
+              <li class="clue" value="4" data-clue="down4">Because of</li>
+              <li class="clue" value="7" data-clue="down5">Commandment word</li>
+            </ol>
+          </section>
+        </div>
+        <button id="checkButton">CHECK ANSWERS</button>
+      </aside>
     </main>
 
     <script src="./app.js"></script>
